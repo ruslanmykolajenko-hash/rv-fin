@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спільний Бюджет $</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f2f2f7;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="p-4 md:p-6 max-w-lg mx-auto pb-12 text-black">
+
+    <!-- Хедер -->
+    <header class="mb-6 flex justify-between items-center px-1">
+        <div>
+            <h1 class="text-2xl font-bold tracking-tight">Наш Бюджет</h1>
+            <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Травень 2026</p>
+        </div>
+        <div>
+            <span class="text-xs bg-white px-3 py-1.5 rounded-full font-bold shadow-sm text-gray-600 border border-gray-100">USD ($)</span>
+        </div>
+    </header>
+
+    <!-- Користувачі -->
+    <main class="grid grid-cols-2 gap-4 mb-5">
+        <!-- Руслан -->
+        <div class="space-y-3">
+            <div onclick="openUserDetails('Руслан')" class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 active:scale-95 transition-all cursor-pointer relative overflow-hidden group">
+                <!-- Велика помітна шестірня -->
+                <div class="absolute right-3 top-3 text-gray-400 hover:text-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.43l-1.003.767c-.3.23-.452.617-.431.996a4.52 4.52 0 0 1 0 .26c-.021.379.13.766.431.996l1.002.767a1.125 1.125 0 0 1 .26 1.43l-1.297 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a4.47 4.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a4.47 4.47 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.43l1.002-.767c.301-.23.452-.617.43-.996a4.52 4.52 0 0 1 0-.26c.022-.379-.129-.766-.43-.996l-1.002-.767a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="images/1.jpg" alt="Руслан" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80'" class="w-10 h-10 rounded-full object-cover border border-gray-100">
+                    <div>
+                        <h3 class="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Руслан</h3>
+                        <p id="bal-Руслан" class="text-lg font-bold mt-0.5">$0</p>
+                    </div>
+                </div>
+                <button onclick="event.stopPropagation(); openTxModal('Руслан')" class="mt-4 w-full bg-[#007aff] text-white text-xs font-bold py-2.5 rounded-xl transition-all active:scale-98 shadow-xs">+ Операція</button>
+            </div>
+            <!-- Стрічка Руслана короткі прев'ю -->
+            <div class="bg-white/60 rounded-2xl p-3 border border-gray-200/40">
+                <h4 class="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-2">Останні рухи</h4>
+                <div id="history-Руслан" class="space-y-1.5 max-h-36 overflow-y-auto no-scrollbar text-xs"></div>
+            </div>
+        </div>
+
+        <!-- Віка -->
+        <div class="space-y-3">
+            <div onclick="openUserDetails('Віка')" class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 active:scale-95 transition-all cursor-pointer relative overflow-hidden group">
+                <!-- Велика помітна шестірня -->
+                <div class="absolute right-3 top-3 text-gray-400 hover:text-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.43l-1.003.767c-.3.23-.452.617-.431.996a4.52 4.52 0 0 1 0 .26c-.021.379.13.766.431.996l1.002.767a1.125 1.125 0 0 1 .26 1.43l-1.297 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a4.47 4.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a4.47 4.47 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.43l1.002-.767c.301-.23.452-.617.43-.996a4.52 4.52 0 0 1 0-.26c.022-.379-.129-.766-.43-.996l-1.002-.767a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="images/2.jpg" alt="Віка" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80'" class="w-10 h-10 rounded-full object-cover border border-gray-100">
+                    <div>
+                        <h3 class="text-gray-400 text-[10px] font-bold uppercase tracking-wider">Віка</h3>
+                        <p id="bal-Віка" class="text-lg font-bold mt-0.5">$0</p>
+                    </div>
+                </div>
+                <button onclick="event.stopPropagation(); openTxModal('Віка')" class="mt-4 w-full bg-[#007aff] text-white text-xs font-bold py-2.5 rounded-xl transition-all active:scale-98 shadow-xs">+ Операція</button>
+            </div>
+            <!-- Стрічка Віки короткі прев'ю -->
+            <div class="bg-white/60 rounded-2xl p-3 border border-gray-200/40">
+                <h4 class="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-2">Останні рухи</h4>
+                <div id="history-Віка" class="space-y-1.5 max-h-36 overflow-y-auto no-scrollbar text-xs"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ТАБЛОЇД -->
+    <section class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 mb-5 grid grid-cols-2 gap-4 text-center">
+        <div class="border-r border-gray-100">
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Загальний Спільний Баланс</p>
+            <p id="total-budget" class="text-2xl font-bold text-black mt-1">$0</p>
+        </div>
+        <div>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Спільні Витрати (Місяць)</p>
+            <p id="total-expenses" class="text-2xl font-bold text-neutral-800 mt-1">$0</p>
+        </div>
+    </section>
+
+    <!-- Картка Банки -->
+    <section class="bg-gradient-to-br from-neutral-800 to-neutral-950 rounded-3xl p-5 shadow-md text-white mb-8 relative overflow-hidden">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xs font-medium text-neutral-400 uppercase tracking-wider">Спільні відкладення «Баночка»</h2>
+                    <p id="bal-jar" class="text-2xl font-bold tracking-tight mt-0.5">$0</p>
+                </div>
+            </div>
+            <button onclick="toggleJarHistory()" class="bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-1.5 rounded-xl font-medium transition-all">
+                Історія ▾
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-3">
+            <button onclick="sendToJar('Руслан')" class="bg-[#34c759] hover:bg-[#28a745] text-white font-bold py-3 px-3 rounded-xl text-xs active:scale-95 transition-all shadow-sm flex items-center justify-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+                </svg>
+                Від Руслан
+            </button>
+            <button onclick="sendToJar('Віка')" class="bg-[#34c759] hover:bg-[#28a745] text-white font-bold py-3 px-3 rounded-xl text-xs active:scale-95 transition-all shadow-sm flex items-center justify-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+                </svg>
+                Від Віки
+            </button>
+        </div>
+
+        <!-- Історія поповнень банки -->
+        <div id="jar-history-block" class="hidden mt-4 pt-4 border-t border-white/10 space-y-2 max-h-40 overflow-y-auto no-scrollbar text-xs">
+            <p class="text-neutral-400 text-center py-2">Історія поповнень порожня</p>
+        </div>
+    </section>
+
+    <!-- Скидання системи -->
+    <section class="bg-red-50 rounded-3xl p-4 border border-red-100 text-center space-y-3">
+        <p class="text-xs font-medium text-red-600">Необхідно повністю очистити бюджет?</p>
+        
+        <div id="delete-box" class="hidden max-w-xs mx-auto space-y-2 pb-2">
+            <p class="text-[10px] text-gray-400">Напишіть слово <span class="font-bold text-red-600 select-all">Delete</span> нижче для підтвердження:</p>
+            <input type="text" id="delete-confirm-input" placeholder="Введіть код підтвердження" class="w-full text-center text-xs p-2 border border-red-200 rounded-xl focus:outline-none bg-white">
+            <button onclick="executeFullReset()" class="w-full bg-red-600 text-white text-xs font-bold py-2 rounded-xl">Остаточно стерти все</button>
+        </div>
+
+        <button id="trigger-delete-btn" onclick="showDeleteConfirm()" class="text-xs text-red-500 font-bold hover:underline">Скинути всі дані системи</button>
+    </section>
+
+
+    <!-- ================= МОДАЛКА 1: ДЕТАЛЬНЕ РЕДАГУВАННЯ & ВЕЛИКА ПОВНА ІСТОРІЯ ================= -->
+    <div id="user-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-4 z-50">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 shadow-xl space-y-5 animate-slide-up max-h-[90vh] overflow-y-auto no-scrollbar">
+            <div class="flex justify-between items-center">
+                <h3 id="user-modal-title" class="text-lg font-bold">Профіль</h3>
+                <button onclick="closeUserModal()" class="text-sm font-semibold text-[#007aff]">Готово</button>
+            </div>
+
+            <!-- Ручне редагування балансу -->
+            <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Поточний баланс на зараз ($)</label>
+                <div class="flex gap-2">
+                    <input type="number" id="direct-balance-input" class="w-full bg-white border border-gray-200 rounded-xl p-2.5 font-bold focus:outline-none focus:border-[#007aff]">
+                    <button onclick="saveDirectBalance()" class="bg-black text-white text-xs px-4 rounded-xl font-bold">Зберегти</button>
+                </div>
+            </div>
+
+            <!-- ПОВНА ІСТОРІЯ ОПЕРАЦІЙ (НОВИЙ ВЕЛИКИЙ БЛОК) -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Повна історія операцій</h4>
+                <div id="modal-full-history" class="space-y-2 max-h-48 overflow-y-auto bg-gray-50 p-3 rounded-2xl border border-gray-100 no-scrollbar text-xs">
+                    <!-- Записи генерирує JS -->
+                </div>
+            </div>
+
+            <!-- Календарик надходжень -->
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Календар майбутніх надходжень</h4>
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 space-y-3">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[10px] text-gray-400 block mb-0.5">Коли очікується</label>
+                            <input type="date" id="plan-date" class="w-full text-xs bg-white border border-gray-200 rounded-lg p-2 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-gray-400 block mb-0.5">Сума ($)</label>
+                            <input type="number" id="plan-amount" placeholder="0" class="w-full text-xs bg-white border border-gray-200 rounded-lg p-2 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-gray-400 block mb-0.5">Джерело / Тип</label>
+                        <select id="plan-type" class="w-full text-xs bg-white border border-gray-200 rounded-lg p-2 focus:outline-none">
+                            <option value="Фіксована ЗП">Фіксована зарплатня</option>
+                            <option value="Проєкт / Фріланс">Проєкт / Швидкий дохід</option>
+                            <option value="Інше надходження">Інше джерело</option>
+                        </select>
+                    </div>
+                    <button onclick="addPlannedIncome()" class="w-full bg-[#007aff] text-white text-xs font-bold py-2.5 rounded-xl">Додати у календар планів</button>
+                </div>
+                <div id="planned-list" class="space-y-1.5 max-h-32 overflow-y-auto no-scrollbar pt-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= МОДАЛКА 2: ДОДАВАННЯ ОПЕРАЦІЙ ================= -->
+    <div id="tx-modal" class="fixed inset-0 bg-black/40 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-4 z-50">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 shadow-xl space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 id="tx-modal-title" class="text-base font-bold">Додати запис</h3>
+                <button onclick="closeTxModal()" class="text-sm font-medium text-gray-400">Скасувати</button>
+            </div>
+            <div class="grid grid-cols-2 gap-2 bg-gray-100 p-1 rounded-xl">
+                <button id="btn-expense" onclick="setTxType('expense')" class="py-2 text-xs font-bold rounded-lg bg-white shadow-xs text-black">Витрата</button>
+                <button id="btn-income" onclick="setTxType('income')" class="py-2 text-xs font-bold rounded-lg text-gray-500">Дохід</button>
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Сума ($)</label>
+                <input type="number" id="tx-amount" placeholder="0" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold text-lg focus:outline-none focus:border-[#007aff]">
+            </div>
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase mb-1">Опис / Категорія</label>
+                <input type="text" id="tx-desc" placeholder="Продукти, Кафе, Аванс..." class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm focus:outline-none focus:border-[#007aff]">
+            </div>
+            <button onclick="submitTx()" class="w-full bg-black text-white font-bold py-3.5 rounded-xl text-sm active:scale-98 transition-all">Зберегти</button>
+        </div>
+    </div>
+
+    <!-- ЛОГІКА ДОДАТКУ -->
+    <script>
+        let state = JSON.parse(localStorage.getItem('joint_budget_state_v4')) || {
+            balances: { 'Руслан': 1000, 'Віка': 1000, 'jar': 0 },
+            history: [],
+            plans: []
+        };
+
+        let activeUser = '';
+        let activeTxType = 'expense';
+
+        function saveState() {
+            localStorage.setItem('joint_budget_state_v4', JSON.stringify(state));
+            renderUI();
+        }
+
+        function renderUI() {
+            document.getElementById('bal-Руслан').innerText = `$${state.balances['Руслан'].toLocaleString()}`;
+            document.getElementById('bal-Віка').innerText = `$${state.balances['Віка'].toLocaleString()}`;
+            document.getElementById('bal-jar').innerText = `$${state.balances['jar'].toLocaleString()}`;
+
+            const total = state.balances['Руслан'] + state.balances['Віка'] + state.balances['jar'];
+            document.getElementById('total-budget').innerText = `$${total.toLocaleString()}`;
+
+            const totalExp = state.history
+                .filter(item => item.type === 'expense' || item.type === 'to_jar')
+                .reduce((sum, item) => sum + item.amount, 0);
+            document.getElementById('total-expenses').innerText = `$${totalExp.toLocaleString()}`;
+
+            renderPersonalHistory('Руслан');
+            renderPersonalHistory('Віка');
+            renderJarHistory();
+            renderPlansList();
+        }
+
+        // Рендер короткої прев'ю історії під картками (показує останні 3 записи)
+        function renderPersonalHistory(user) {
+            const container = document.getElementById(`history-${user}`);
+            const filtered = state.history.filter(h => h.user === user);
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-[10px] text-gray-400 text-center py-2">Немає рухів</p>`;
+                return;
+            }
+
+            // Беремо лише перші 3 елементи для прев'ю на головній
+            const previewData = filtered.slice(0, 3);
+
+            container.innerHTML = previewData.map(h => {
+                let isExpense = (h.type === 'expense' || h.type === 'to_jar');
+                let colorClass = isExpense ? 'text-red-500' : 'text-green-600';
+                let sign = isExpense ? '-' : '+';
+                return `
+                    <div class="flex justify-between items-center bg-white p-2 rounded-xl border border-gray-100/70">
+                        <div class="truncate max-w-[80px]">
+                            <p class="font-medium text-black truncate">${h.desc}</p>
+                        </div>
+                        <span class="font-bold text-xs ${colorClass}">
+                            ${sign}$${h.amount}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Рендер повної історії всередині модалки профілю
+        function renderFullModalHistory(user) {
+            const container = document.getElementById('modal-full-history');
+            const filtered = state.history.filter(h => h.user === user);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-gray-400 text-center py-4">Історія транзакцій порожня</p>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(h => {
+                let isExpense = (h.type === 'expense' || h.type === 'to_jar');
+                let colorClass = isExpense ? 'text-red-500' : 'text-green-600';
+                let sign = isExpense ? '-' : '+';
+                let badge = h.type === 'to_jar' ? 'В Банку 🏺' : (h.type === 'expense' ? 'Витрата' : 'Дохід');
+                return `
+                    <div class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-gray-200/50 mb-1.5">
+                        <div>
+                            <p class="font-semibold text-black">${h.desc}</p>
+                            <p class="text-[9px] text-gray-400">${h.time} · <span class="font-medium">${badge}</span></p>
+                        </div>
+                        <span class="font-bold ${colorClass}">
+                            ${sign}$${h.amount}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderJarHistory() {
+            const container = document.getElementById('jar-history-block');
+            const filtered = state.history.filter(h => h.type === 'to_jar');
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-neutral-400 text-center py-2">Історія баночки порожня</p>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(h => `
+                <div class="flex justify-between items-center bg-white/5 p-2.5 rounded-xl">
+                    <div>
+                        <p class="font-medium text-white">${h.user} ➔ Скарбничка</p>
+                        <p class="text-[9px] text-neutral-500">${h.time}</p>
+                    </div>
+                    <span class="font-bold text-green-400">+$${h.amount}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderPlansList() {
+            const container = document.getElementById('planned-list');
+            const filtered = state.plans.filter(p => p.user === activeUser);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-400 text-center py-3">Немає планів у календарі</p>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map((p, idx) => `
+                <div class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-gray-100 text-xs shadow-xs">
+                    <div>
+                        <p class="font-semibold text-black">${p.type_desc}</p>
+                        <p class="text-[10px] text-gray-400">📅 ${p.date}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-green-600">+$${p.amount}</span>
+                        <button onclick="deletePlan(${idx})" class="text-gray-300 hover:text-red-500 font-bold px-1">✕</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleJarHistory() {
+            document.getElementById('jar-history-block').classList.toggle('hidden');
+        }
+
+        function sendToJar(user) {
+            const amountStr = prompt(`Сума поповнення Банки від імені ${user}:`);
+            const amount = parseFloat(amountStr);
+            if (!amount || amount <= 0) return;
+
+            if (state.balances[user] < amount) return alert('Недостатньо коштів!');
+
+            state.balances[user] -= amount;
+            state.balances['jar'] += amount;
+
+            state.history.unshift({
+                user: user,
+                type: 'to_jar',
+                desc: 'Поповнення Банки',
+                amount: amount,
+                time: new Date().toLocaleDateString('uk-UA') + ' ' + new Date().toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'})
+            });
+
+            saveState();
+        }
+
+        function showDeleteConfirm() {
+            document.getElementById('delete-box').classList.remove('hidden');
+            document.getElementById('trigger-delete-btn').classList.add('hidden');
+        }
+
+        function executeFullReset() {
+            const val = document.getElementById('delete-confirm-input').value;
+            if (val === 'Delete') {
+                state = { balances: { 'Руслан': 0, 'Віка': 0, 'jar': 0 }, history: [], plans: [] };
+                localStorage.removeItem('joint_budget_state_v4');
+                saveState();
+                document.getElementById('delete-box').classList.add('hidden');
+                document.getElementById('trigger-delete-btn').classList.remove('hidden');
+                document.getElementById('delete-confirm-input').value = '';
+                alert('Всі дані очищено.');
+            } else {
+                alert('Неправильний пароль підтвердження.');
+            }
+        }
+
+        function openUserDetails(user) {
+            activeUser = user;
+            document.getElementById('user-modal-title').innerText = `Картка: ${user}`;
+            document.getElementById('direct-balance-input').value = state.balances[user];
+            document.getElementById('user-modal').classList.remove('hidden');
+            renderFullModalHistory(user);
+            renderPlansList();
+        }
+
+        function closeUserModal() { document.getElementById('user-modal').classList.add('hidden'); }
+
+        function saveDirectBalance() {
+            const val = parseFloat(document.getElementById('direct-balance-input').value);
+            if (isNaN(val) || val < 0) return alert('Некоректна сума');
+            state.balances[activeUser] = val;
+            saveState();
+            closeUserModal();
+        }
+
+        function addPlannedIncome() {
+            const date = document.getElementById('plan-date').value;
+            const amount = parseFloat(document.getElementById('plan-amount').value);
+            const type_desc = document.getElementById('plan-type').value;
+
+            if (!date || !amount || amount <= 0) return alert('Заповніть дату та суму');
+
+            state.plans.push({ user: activeUser, date, amount, type_desc });
+            document.getElementById('plan-amount').value = '';
+            document.getElementById('plan-date').value = '';
+            saveState();
+            renderPlansList();
+        }
+
+        function deletePlan(idx) {
+            state.plans.splice(idx, 1);
+            saveState();
+            renderPlansList();
+        }
+
+        function openTxModal(user) {
+            activeUser = user;
+            document.getElementById('tx-modal-title').innerText = `Дія для: ${user}`;
+            document.getElementById('tx-amount').value = '';
+            document.getElementById('tx-desc').value = '';
+            setTxType('expense');
+            document.getElementById('tx-modal').classList.remove('hidden');
+        }
+
+        function closeTxModal() { document.getElementById('tx-modal').classList.add('hidden'); }
+
+        function setTxType(type) {
+            activeTxType = type;
+            const exp = document.getElementById('btn-expense');
+            const inc = document.getElementById('btn-income');
+            if (type === 'expense') {
+                exp.className = "py-2 text-xs font-bold rounded-lg bg-white shadow-xs text-black";
+                inc.className = "py-2 text-xs font-bold rounded-lg text-gray-500";
+            } else {
+                inc.className = "py-2 text-xs font-bold rounded-lg bg-white shadow-xs text-black";
+                exp.className = "py-2 text-xs font-bold rounded-lg text-gray-500";
+            }
+        }
+
+        function submitTx() {
+            const amount = parseFloat(document.getElementById('tx-amount').value);
+            const desc = document.getElementById('tx-desc').value || (activeTxType === 'expense' ? 'Витрата' : 'Дохід');
+
+            if (!amount || amount <= 0) return alert('Вкажіть суму');
+
+            if (activeTxType === 'expense') {
+                state.balances[activeUser] -= amount;
+            } else {
+                state.balances[activeUser] += amount;
+            }
+
+            state.history.unshift({
+                user: activeUser,
+                type: activeTxType,
+                desc: desc,
+                amount: amount,
+                time: new Date().toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'})
+            });
+
+            saveState();
+            closeTxModal();
+        }
+
+        renderUI();
+    </script>
+</body>
+</html>
